@@ -1,0 +1,9 @@
+export const HomeRoute = "/Home";
+export const InvestTodayRoute = "/Invest Today";
+export const CurriculumRoute = "/Curriculum";
+export const WorkoutWallsRoute = "/Workout Walls";
+export const PodcastRoute = "/Podcast";
+export const InternsRoute = "/Interns";
+export const AboutUsRoute = "/About Us";
+export const ContactRoute = "/Contact";
+export const BlogRoute = "/Blog";

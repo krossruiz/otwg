@@ -1,0 +1,38 @@
+.menuitem {
+      display: inline-flex;
+      flex-flow: row;
+      margin: 10px;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #cccccc;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition-duration: .4s;
+      text-decoration: none;
+}
+
+
+
+.menuitem:hover {
+    color: #ffffff;
+    text-shadow: .5px .5px;
+    /* animation-name: menuitemhover;
+    animation-duration: .7s; */
+    animation-fill-mode: forwards;
+    transition-duration: .4s;
+    text-decoration: underline;
+    user-select: none;
+}
+.activeMenuItem {
+    color: #ffa500 !important;
+    text-decoration: none !important;
+    transform: scale(1.21) !important;
+}
+
+/* @keyframes menuitemhover{}
+    100%{
+        color: #ffa500;
+    }
+} */

@@ -3,19 +3,6 @@ import * as THREE from 'three';
 import { connect } from 'react-redux';
 
 class AnimationWrapper extends React.Component {
-    constructor(props) {
-        super(props);
-        this.updateAnimation = this.updateAnimation.bind(this);
-    }
-    componentDidMount() {
-        this.rAF = requestAnimationFrame(this.updateAnimation);
-    }
-    updateAnimation() {
-        this.rAF = requestAnimationFrame(this.updateAnimation);
-    }
-    componentWillUnmount() {
-        cancelAnimationFrame(this.rAF);
-    }
     render() {
         return (
             <ThreeJSWallSceneRenderer/>
@@ -23,33 +10,47 @@ class AnimationWrapper extends React.Component {
     }
 }
 
+let x = 0;
+let dx = 10;
+
 class ThreeJSWallSceneRenderer extends React.Component {
     constructor(props){
         super(props)
         this.canvasRef = React.createRef();
+        this.updateAnimation = this.updateAnimation.bind(this);
+        this.rendererWidth = 600;
+        this.rendererHeight = 200;
     }
     componentDidMount(){
-        const canvas = this.canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const width = canvas.width;
-        const height = canvas.height;
-        ctx.save();
-        ctx.beginPath();
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(75, this.rendererWidth / this.rendererHeight, 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize(600, 200);
+        this.mount.appendChild(this.renderer.domElement);
+
+        let geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        let material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true } );
+        this.cube = new THREE.Mesh( geometry, material );
+        this.scene.add( this.cube );
+
+        this.camera.position.z = 5;
+        console.log(this.scene);
+
+        this.rAF = requestAnimationFrame(this.updateAnimation);
     }
-    componentDidUpdate(){
-        const canvas = this.canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const width = canvas.width;
-        const height = canvas.height;
-        ctx.save();
-        ctx.beginPath();
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillRect(100,100,100,100);
+    updateAnimation() {
+        this.cube.rotateX(0.1);
+        this.cube.rotateY(0.1);
+        this.renderer.render( this.scene, this.camera );
+        this.rAF = requestAnimationFrame(this.updateAnimation);
     }
     render(){
-        return(<canvas ref={this.canvasRef}/>)
+        return(
+            <div
+                style={{ width: this.rendererWidth, height: this.rendererHeight }}
+                ref={(mount) => { this.mount = mount }}
+            />
+        )
     }
 }
 

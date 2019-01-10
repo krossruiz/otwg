@@ -24,23 +24,23 @@ class ThreeJSWallSceneRenderer extends React.Component {
     componentDidMount(){
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, this.rendererWidth / this.rendererHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer( { alpha: true } );
         this.renderer.setSize(600, 200);
         this.mount.appendChild(this.renderer.domElement);
 
         let geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        let material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true } );
+        let material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true } );
         this.cube = new THREE.Mesh( geometry, material );
         this.scene.add( this.cube );
 
-        this.camera.position.z = 5;
+        this.camera.position.z = 1;
         console.log(this.scene);
 
         this.rAF = requestAnimationFrame(this.updateAnimation);
     }
     updateAnimation() {
-        this.cube.rotateX(0.1);
-        this.cube.rotateY(0.1);
+        this.cube.rotateX(0.05);
+        this.cube.rotateY(0.05);
         this.renderer.render( this.scene, this.camera );
         this.rAF = requestAnimationFrame(this.updateAnimation);
     }

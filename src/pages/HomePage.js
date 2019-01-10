@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SlideshowCarousel from '../components/SlideshowCarousel';
+import WallSceneContainer from '../components/WallSceneContainer';
 import { vhsStatic } from '../constants/imageLinks';
 
 class HomePage extends React.Component {
@@ -12,7 +13,7 @@ class HomePage extends React.Component {
         return (
             <div>
                 <div style={{ display: "flex", justifyContent: "center", backgroundImage: "url(" + vhsStatic + ")", width: "100vw" }}>
-                    <SlideshowCarousel />
+                    <WallSceneContainer/>
                 </div>
                 <div style={{ padding: "20px 0px 0px 0px" }}>
                     <h1

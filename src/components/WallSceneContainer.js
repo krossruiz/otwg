@@ -1,5 +1,6 @@
 import React from 'react';
 import * as THREE from 'three';
+import GLTFLoader from 'three-gltf-loader';
 import { connect } from 'react-redux';
 
 class AnimationWrapper extends React.Component {
@@ -18,29 +19,56 @@ class ThreeJSWallSceneRenderer extends React.Component {
         super(props)
         this.canvasRef = React.createRef();
         this.updateAnimation = this.updateAnimation.bind(this);
-        this.rendererWidth = 600;
-        this.rendererHeight = 200;
+        this.rendererWidth = window.innerWidth * 1;
+        this.rendererHeight = window.innerHeight *.4;
     }
     componentDidMount(){
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, this.rendererWidth / this.rendererHeight, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer( { alpha: true } );
-        this.renderer.setSize(600, 200);
+        this.renderer.setSize(this.rendererWidth, this.rendererHeight);
         this.mount.appendChild(this.renderer.domElement);
 
-        let geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        let material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true } );
-        this.cube = new THREE.Mesh( geometry, material );
-        this.scene.add( this.cube );
+        let light = new THREE.PointLight("0xff0000", 5, 100);
+        light.position.z = 10;
+        this.scene.add( light );
 
-        this.camera.position.z = 1;
+        let loader = new GLTFLoader();
+
+        loader.load(
+            '../models/wall/wall.glb',
+            ( gltf ) => {
+                // called when the resource is loaded
+                console.log(gltf);
+                this.wall = gltf.scene.children[0];
+                this.animationMixer = new THREE.AnimationMixer(this.wall);
+                this.animationClips = gltf.animations;
+                let SkateboardCirclingClip = THREE.AnimationClip.findByName(this.animationClips, 'skateboard_circling');
+                let SkateboardCirclingAction = this.animationMixer.clipAction(SkateboardCirclingClip);
+                SkateboardCirclingAction.play();
+                console.log(this.wall);
+                this.scene.add(this.wall);
+            },
+            ( xhr ) => {
+                // called while loading is progressing
+                console.log( `${( xhr.loaded / xhr.total * 100 )}% loaded` );
+            },
+            ( error ) => {
+                // called when loading has errors
+                console.error( 'An error happened', error );
+            },
+        );
+
+        this.camera.position.z = 4;
         console.log(this.scene);
 
         this.rAF = requestAnimationFrame(this.updateAnimation);
     }
     updateAnimation() {
-        this.cube.rotateX(0.05);
-        this.cube.rotateY(0.05);
+        if(this.wall){
+            this.animationMixer.update(0.01);
+            this.wall.rotateY(0.005);
+        }
         this.renderer.render( this.scene, this.camera );
         this.rAF = requestAnimationFrame(this.updateAnimation);
     }

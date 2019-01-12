@@ -29,5 +29,6 @@ export const cailaIntern = "OTWG_IMAGES/cailaIntern.jpg";
 export const perlaIntern = "OTWG_IMAGES/perlaIntern.jpg";
 
 export const vhsStatic = "OTWG_IMAGES/vhsstatic.gif";
+export const staticNoise = "OTWG_IMAGES/staticnoise.gif";
 
 export const slides = [mauraPosingByGraffitiWall, cailaGageAndPeter, painterPosingWithBrushes1, painterPosingWithBrushes2];

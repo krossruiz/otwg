@@ -5,6 +5,7 @@ import Radium, {StyleRoot} from 'radium';
 import { connect } from 'react-redux';
 import NavBar from './components/NavBar';
 import SlideshowCarousel from './components/SlideshowCarousel';
+import WallSceneContainer from './components/WallSceneContainer';
 import { Link, Route, withRouter } from 'react-router-dom';
 import { HomeRoute, InvestTodayRoute, CurriculumRoute, WorkoutWallsRoute, PodcastRoute, InternsRoute, AboutUsRoute, ContactRoute, BlogRoute } from './constants/routerRoutes';
 import HomePage from './pages/HomePage';
@@ -16,6 +17,7 @@ import InternsPage from './pages/InternsPage';
 import AboutUsPage from './pages/AboutUsPage';
 import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
+import { vhsStatic, staticNoise } from './constants/imageLinks';
 
 
 const styles = {
@@ -44,7 +46,7 @@ class App extends React.Component {
 			<div className="App" style={{ backgroundColor: "#000000" }}>
 				{/* <Link to={HomeRoute}>Home</Link> */}
 				<StyleRoot>
-					<div style={[styles.fade, { 
+					{/* <div style={[styles.fade, { 
 						// backgroundImage: "#000000",
 					height: "8vh" }]}>
 						<img
@@ -57,8 +59,20 @@ class App extends React.Component {
 							alt="Error loading logo"
 							onClick={this.gotoHome}
 						></img>
-					</div>
+					</div> */}
 					<NavBar/>
+					<div style={
+						{
+							display: "flex",
+							justifyContent: "center",
+							backgroundImage: "url(" + vhsStatic + ")",
+							// backgroundColor: "black",
+							width: "100vw",
+							backgroundSize: "cover" 
+						}
+					}>
+						<WallSceneContainer/>
+					</div>
 					<Route path={HomeRoute} component={HomePage}/>
 					<Route path={InvestTodayRoute} component={InvestTodayPage}/>
 					<Route path={CurriculumRoute} component={CurriculumPage}/>

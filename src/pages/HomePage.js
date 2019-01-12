@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SlideshowCarousel from '../components/SlideshowCarousel';
 import WallSceneContainer from '../components/WallSceneContainer';
-import { vhsStatic } from '../constants/imageLinks';
+import { vhsStatic, staticNoise } from '../constants/imageLinks';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -12,10 +12,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <div>
-                <div style={{ display: "flex", justifyContent: "center", backgroundImage: "url(" + vhsStatic + ")", width: "100vw" }}>
-                    <WallSceneContainer/>
-                </div>
-                <div style={{ padding: "20px 0px 0px 0px" }}>
+                {/* <div style={{ padding: "20px 0px 0px 0px" }}>
                     <h1
                         style={{ display: "inline", color: "#ffffff" }}
                     >
@@ -26,11 +23,11 @@ class HomePage extends React.Component {
                     >
                         and they need a field to play on.
 						</h1>
-                </div>
-                <div style={{ padding: "20px" }}>
+                </div> */}
+                {/* <div style={{ padding: "20px" }}>
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/yLFeaTD2syg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                     <h1
                         style={{ display: "inline", color: "#ffffff" }}
                     >
@@ -49,7 +46,7 @@ class HomePage extends React.Component {
                 <h1 style={{color: "#ffa500"}}>Follow Us On Social Media</h1>
                     <a style={{fontSize: "2em", margin: "0px 15px"}} href="https://www.facebook.com/offthewallgraffiti">Facebook</a>
                     <a style={{fontSize: "2em", margin: "0px 15px"}} href="https://www.instagram.com/offthewallgraffiti/">Instagram</a>
-                    <a style={{fontSize: "2em", margin: "0px 15px"}} href="https://twitter.com/offthewallgraff">Twitter</a>
+                    <a style={{fontSize: "2em", margin: "0px 15px"}} href="https://twitter.com/offthewallgraff">Twitter</a> */}
             </div>
         );
     }

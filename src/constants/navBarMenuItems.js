@@ -1,3 +1,4 @@
+export const HOME_MENU_ITEM_ID = "home";
 export const INVEST_TODAY_MENU_ITEM_ID = "investToday";
 export const CURRICULUM_MENU_ITEM_ID = "curriculum";
 export const WORKOUT_WALLS_MENU_ITEM_ID = "workoutWalls";
